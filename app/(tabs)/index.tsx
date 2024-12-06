@@ -1,9 +1,18 @@
-import { Image, StyleSheet, Platform, Text, View } from 'react-native'
+import {
+  Image,
+  StyleSheet,
+  Platform,
+  Text,
+  View,
+  Pressable,
+} from 'react-native'
 
 import { HelloWave } from '@/components/HelloWave'
 import ParallaxScrollView from '@/components/ParallaxScrollView'
 import { ThemedText } from '@/components/ThemedText'
 import { ThemedView } from '@/components/ThemedView'
+import { Link } from 'expo-router'
+import { MaterialIcons } from '@expo/vector-icons'
 
 export default function HomeScreen() {
   return (
@@ -18,14 +27,28 @@ export default function HomeScreen() {
     >
       <ThemedView style={styles.titleContainer}>
         <ThemedText className="text-black" type="title">
-          <Text
-            style={{ color: 'red' }}
-            className="w-10 h-10 text-red-400 bg-green-500"
-          >
-            Fast And Explore
-          </Text>
           <Text className="text-black">Welcome!</Text>
         </ThemedText>
+        <Link
+          className="w-fit h-fit absolute button-10 right-4"
+          asChild
+          href={'/camera'}
+        >
+          <Pressable className="flex flex-col items-center justify-center  ">
+            <MaterialIcons
+              className=" rounded-full "
+              name="camera"
+              size={30}
+              color={'white'}
+            />
+            <Text className="text-white">Camera</Text>
+          </Pressable>
+        </Link>
+        {/* <View className="flex flex-row-reverse gap-2">
+          <View className="flex items-center justify-center w-16 h-8  bg-green-500 rounded-full"></View>
+          <View className="w-8 h-8 text-red-400 bg-red-500 rounded-full"></View>
+          <View className="w-8 h-8 text-red-400 bg-yellow-500 rounded-full"></View>
+        </View> */}
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
