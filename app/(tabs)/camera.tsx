@@ -6,6 +6,7 @@ import {
   View,
   ActivityIndicator,
   Pressable,
+  Button,
 } from 'react-native'
 
 import { HelloWave } from '@/components/HelloWave'
@@ -21,6 +22,9 @@ import {
 } from 'expo-camera'
 import { useEffect, useRef, useState } from 'react'
 import { MaterialIcons } from '@expo/vector-icons'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import path from 'path'
+import * as FileSystem from 'expo-file-system'
 //https://notjust.notion.site/Camera-0e431cdfec744f8f8cd6483d529d3d26?p=f0bf37f91ba14b0bbf71f6e3f0a54475&pm=s
 
 export default function CameraScreen() {
@@ -46,6 +50,16 @@ export default function CameraScreen() {
     // console.log({ res })
   }
 
+  const saveFile = async (uri: string) => {
+    const filename = path.parse(uri).base
+    await FileSystem.copyAsync({
+      from: uri,
+      to: FileSystem.documentDirectory + filename,
+    })
+    setPicture(undefined)
+    router.back()
+  }
+
   if (!permission?.granted) {
     return (
       <View className="  w-full h-full flex items-center justify-center  ">
@@ -56,8 +70,13 @@ export default function CameraScreen() {
 
   if (picture) {
     return (
-      <View>
-        <Image source={{ uri: picture.uri }} className="w-full h-full" />
+      <View className="flex-1">
+        <Image source={{ uri: picture.uri }} className="w-full flex-1" />
+        <View className="p-2.5">
+          <SafeAreaView edges={['bottom']}>
+            <Button title="Save" onPress={() => saveFile(picture.uri)} />
+          </SafeAreaView>
+        </View>
         <MaterialIcons
           onPress={() => {
             setPicture(undefined)
