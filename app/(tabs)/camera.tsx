@@ -126,7 +126,7 @@ export default function CameraScreen() {
   return (
     <View className="  ">
       <CameraView
-        mode="video"
+        // mode="video"
         ref={cameraRef}
         facing={facing}
         style={{ width: '100%', height: '100%' }}
