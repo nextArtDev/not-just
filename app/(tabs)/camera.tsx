@@ -25,6 +25,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import path from 'path'
 import * as FileSystem from 'expo-file-system'
+import { Video } from 'expo-av'
 //https://notjust.notion.site/Camera-0e431cdfec744f8f8cd6483d529d3d26?p=f0bf37f91ba14b0bbf71f6e3f0a54475&pm=s
 
 export default function CameraScreen() {
@@ -32,6 +33,9 @@ export default function CameraScreen() {
   const [permission, requestPermission] = useCameraPermissions()
   const [facing, setFacing] = useState<CameraType>('back')
   const [picture, setPicture] = useState<CameraCapturedPicture>()
+  const [isRecording, setIsRecording] = useState(false)
+  const [video, setVideo] = useState<string>()
+
   const cameraRef = useRef<CameraView>(null)
 
   useEffect(() => {
@@ -49,6 +53,20 @@ export default function CameraScreen() {
     setPicture(res)
     // console.log({ res })
   }
+  const onPress = () => {
+    if (isRecording) {
+      cameraRef.current?.stopRecording()
+    } else {
+      takePicture()
+    }
+  }
+  const startRecording = async () => {
+    setIsRecording(true)
+    const res = await cameraRef.current?.recordAsync({ maxDuration: 60 })
+    setVideo(res?.uri)
+    console.log({ res })
+    setIsRecording(false)
+  }
 
   const saveFile = async (uri: string) => {
     const filename = path.parse(uri).base
@@ -57,6 +75,7 @@ export default function CameraScreen() {
       to: FileSystem.documentDirectory + filename,
     })
     setPicture(undefined)
+    setVideo(undefined)
     router.back()
   }
 
@@ -68,18 +87,32 @@ export default function CameraScreen() {
     )
   }
 
-  if (picture) {
+  if (picture || video) {
     return (
       <View className="flex-1">
-        <Image source={{ uri: picture.uri }} className="w-full flex-1" />
+        {picture && (
+          <Image source={{ uri: picture.uri }} className="w-full flex-1" />
+        )}
+        {video && (
+          <Video
+            source={{ uri: video }}
+            className="w-full flex-1"
+            shouldPlay
+            isLooping
+          />
+        )}
         <View className="p-2.5">
           <SafeAreaView edges={['bottom']}>
-            <Button title="Save" onPress={() => saveFile(picture.uri)} />
+            <Button
+              title="Save"
+              onPress={() => saveFile(picture?.uri || video)}
+            />
           </SafeAreaView>
         </View>
         <MaterialIcons
           onPress={() => {
             setPicture(undefined)
+            setVideo(undefined)
           }}
           name="close"
           size={35}
@@ -93,6 +126,7 @@ export default function CameraScreen() {
   return (
     <View className="  ">
       <CameraView
+        mode="video"
         ref={cameraRef}
         facing={facing}
         style={{ width: '100%', height: '100%' }}
@@ -104,8 +138,10 @@ export default function CameraScreen() {
         >
           <View />
           <Pressable
-            onPress={takePicture}
+            onPress={onPress}
+            onLongPress={startRecording}
             className="w-12 h-12 rounded-full bg-white"
+            style={{ backgroundColor: isRecording ? 'crimson' : 'white' }}
           />
           <MaterialIcons
             name="flip-camera-android"

@@ -2,6 +2,9 @@ import { Link, useLocalSearchParams, Stack, router } from 'expo-router'
 import { View, Image } from 'react-native'
 import * as FileSystem from 'expo-file-system'
 import { MaterialIcons } from '@expo/vector-icons'
+import { getMediaType } from '@/utils/media'
+import { ResizeMode, Video } from 'expo-av'
+import { useVideoPlayer, VideoView } from 'expo-video'
 // import { name } from '@/babel.config'
 // import { getMediaType } from '../utils/media';
 // import { ResizeMode, Video } from 'expo-av';
@@ -10,16 +13,15 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 export default function ImageScreen() {
   const { name } = useLocalSearchParams<{ name: string }>()
-  // const [permissionResponse, requestPermissions] =
-  //   MediaLibrary.usePermissions();
+  // const [permissionResponse, requestPermissions] = MediaLibrary.usePermissions()
 
   const fullUri = (FileSystem.documentDirectory || '') + (name || '')
-  // const type = getMediaType(fullUri);
+  const type = getMediaType(fullUri)
 
-  // const player = useVideoPlayer(fullUri, (player) => {
-  //   player.loop = true;
-  //   player.play();
-  // });
+  const player = useVideoPlayer(fullUri, (player) => {
+    player.loop = true
+    player.play()
+  })
 
   const onDelete = async () => {
     await FileSystem.deleteAsync(fullUri)
@@ -64,11 +66,12 @@ export default function ImageScreen() {
           ),
         }}
       />
-
-      <Image
-        source={{ uri: fullUri }}
-        style={{ width: '100%', height: '100%' }}
-      />
+      {type === 'image' && (
+        <Image
+          source={{ uri: fullUri }}
+          style={{ width: '100%', height: '100%' }}
+        />
+      )}
       <MaterialIcons
         onPress={onDelete}
         name="delete"
@@ -77,14 +80,21 @@ export default function ImageScreen() {
         className="  p-1 absolute bottom-10 left-10"
       />
 
-      {/* {type === 'video' && (
-        
+      {type === 'video' && (
         <VideoView
           player={player}
           style={{ width: '100%', height: '100%' }}
           contentFit="cover"
         />
-      )} */}
+        // <Video
+        //   source={{ uri: fullUri }}
+        //   style={{ width: '100%', height: '100%' }}
+        //   resizeMode={ResizeMode.COVER}
+        //   shouldPlay
+        //   isLooping
+        //   useNativeControls
+        // />
+      )}
     </View>
   )
 }
