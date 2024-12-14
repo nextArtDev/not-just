@@ -1,44 +1,77 @@
 import CustomButton from '@/components/CustomButton'
 import CustomTextInput from '@/components/CustomTextInput'
+import KeyboardAwareScrollView from '@/components/KeyboardAwareScrollView'
 import { Link, router, Stack } from 'expo-router'
 import { useState } from 'react'
-import { Text, TextInput, View } from 'react-native'
+import { FormProvider, useForm } from 'react-hook-form'
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = {}
 
 function PersonalDetails({}: Props) {
-  const [fullName, setFullName] = useState('')
-  const onNext = () => {
-    console.log({ fullName })
+  // const { setPersonalInfo, personalInfo } = useCheckoutForm()
+
+  // const form = useForm<PersonalInfo>({
+  //   resolver: zodResolver(PersonalInfoSchema),
+  //   defaultValues: personalInfo,
+  // })
+  const form = useForm()
+
+  const onNext = (data) => {
+    console.log({data})
     //validate
 
     //router next
     router.push('/checkout/payment')
   }
   return (
-    <View className="w-full h-full flex gap-4">
-      <Text className="text-white w-full text-center text-xl font-semibold ">
-        Personal Details
-      </Text>
-      <CustomTextInput name="" label="Full Name" placeholder="" />
-      <CustomTextInput name="" label="Address" placeholder="" />
-      <View className="flex flex-row gap-2 items-center justify-between">
-        <CustomTextInput name="" label="" placeholder="City" />
-        <CustomTextInput name="" label="" placeholder="Post Code" />
-      </View>
-      <CustomTextInput
-        name=""
+    <KeyboardAwareScrollView>
+      <FormProvider {...form}>
+        <CustomTextInput name="fullName" label="Full Name" placeholder="" />
+        <CustomTextInput name="address" label="Address" placeholder="" />
+        <View className="flex flex-row gap-2 items-center justify-between">
+          <CustomTextInput
+            className="flex-1"
+            name="city"
+            label="City"
+            placeholder="City"
+          />
+          <CustomTextInput
+            className="flex-1"
+            name="postcode"
+            label="Post Code"
+            placeholder="Post Code"
+          />
+        </View>
+        {/* <CustomTextInput
+        name="country"
         inputMode="tel"
         label="Phone Number"
         placeholder=""
-      />
+      /> */}
+        <CustomTextInput
+          name="phone"
+          inputMode="tel"
+          label="Phone Number"
+          placeholder=""
+        />
+        {/* <CustomTextInput name="birthdate" placeholder="birthdate" /> */}
 
-      <CustomButton
-        onPress={onNext}
-        title="Next"
-        className="mt-auto mb-6 max-w-[90vw] mx-auto"
-      />
-    </View>
+        <CustomButton
+          onPress={form.handleSubmit(onNext)}
+          title="Next"
+          className="mt-auto max-w-[90vw] mx-auto"
+        />
+      </FormProvider>
+    </KeyboardAwareScrollView>
   )
 }
 
