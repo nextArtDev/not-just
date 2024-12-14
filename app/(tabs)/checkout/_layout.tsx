@@ -21,7 +21,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="checkout" />
+        <Stack.Screen name="index" />
         <Stack.Screen name="personal" options={{ title: 'Personal' }} />
         <Stack.Screen name="payment" options={{ title: 'Payment' }} />
         <Stack.Screen name="confirm" options={{ title: 'Confirm' }} />

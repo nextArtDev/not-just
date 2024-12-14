@@ -12,12 +12,18 @@ type CustomButton = {
   rightIcon?: ReactNode
   title: string
   style?: StyleProp<ViewStyle>
+  className?: string
 } & ComponentProps<typeof Pressable>
 
 const CustomButton = forwardRef<View, CustomButton>(
-  ({ rightIcon, title, style, ...pressableProps }, ref) => {
+  ({ rightIcon, title, style, className, ...pressableProps }, ref) => {
     return (
-      <Pressable ref={ref} {...pressableProps} style={[styles.button, style]}>
+      <Pressable
+        className={className}
+        ref={ref}
+        {...pressableProps}
+        style={[styles.button, style]}
+      >
         <Text style={styles.buttonText}>{title}</Text>
         <View style={styles.rightIconContainer}>{rightIcon}</View>
       </Pressable>

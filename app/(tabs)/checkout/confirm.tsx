@@ -1,18 +1,24 @@
-import { Link, Stack } from 'expo-router'
+import CustomButton from '@/components/CustomButton'
+import { Link, router, Stack } from 'expo-router'
 import { Text, View } from 'react-native'
 
 type Props = {}
 
 function ConfirmForm({}: Props) {
+  const onNext = () => {
+    //validate
+
+    //submit data
+
+    //router next
+    // router.push('/checkout')
+    router.dismissAll()
+    // router.back()
+  }
   return (
-    <View className="w-full h-full flex items-center justify-center">
-      {/* <Stack.Screen title="Checkout" /> */}
-      <Link
-        href={'/checkout/personal'}
-        className="text-white text-3xl border border-white/60 rounded-lg px-2 py-1"
-      >
-        Confirm
-      </Link>
+    <View className="w-full h-full flex p-10">
+      <Text className="text-white">Confirm form</Text>
+      <CustomButton onPress={onNext} title="Submit" className="mt-auto mb-6" />
     </View>
   )
 }

@@ -6,10 +6,8 @@ import { StyleSheet, Text, View } from 'react-native'
 export default function Checkout() {
   return (
     <View style={styles.container}>
-      {/* <Stack.Screen options={{ title: 'Home' }} /> */}
-
-      <Link href="/checkout" asChild>
-        <CustomButton title="Checkout" />
+      <Link href="/checkout/personal" asChild>
+        <CustomButton title="Go Personal" />
       </Link>
 
       <StatusBar style="auto" />
@@ -23,5 +21,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 20,
   },
 })
