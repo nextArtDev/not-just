@@ -33,9 +33,9 @@ const CustomButton = forwardRef<View, CustomButton>(
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#005055',
+    backgroundColor: '#777799',
     padding: 20,
-    borderRadius: 100,
+    borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 20,
