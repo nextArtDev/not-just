@@ -1,26 +1,82 @@
+import { Text, View, StyleSheet } from 'react-native'
 import CustomButton from '@/components/CustomButton'
-import { Link, router, Stack } from 'expo-router'
-import { Text, View } from 'react-native'
+import { Link, router } from 'expo-router'
+import KeyboardAwareScrollView from '@/components/KeyboardAwareScrollView'
+import { useCheckoutForm } from '@/contexts/CheckoutFormProvider'
 
-type Props = {}
+export default function ConfirmForm() {
+  const { personalInfo, paymentInfo, onSubmit } = useCheckoutForm()
 
-function ConfirmForm({}: Props) {
-  const onNext = () => {
-    //validate
-
-    //submit data
-
-    //router next
-    // router.push('/checkout')
-    router.dismissAll()
-    // router.back()
-  }
   return (
-    <View className="w-full h-full flex p-10">
-      <Text className="text-white">Confirm form</Text>
-      <CustomButton onPress={onNext} title="Submit" className="mt-auto mb-6" />
-    </View>
+    <KeyboardAwareScrollView>
+      <View style={{ gap: 10, flex: 1 }}>
+        {personalInfo && (
+          <View style={styles.dataContainer}>
+            <View style={styles.dataContainerHeader}>
+              <Text style={styles.title}>Personal</Text>
+              <Link
+                href={'/checkout'}
+                style={{ color: '#005055', fontWeight: '600' }}
+              >
+                Edit
+              </Link>
+            </View>
+            {Object.entries(personalInfo).map(([key, value]) => (
+              <Text key={key}>
+                {key}: {value?.toString()}
+              </Text>
+            ))}
+          </View>
+        )}
+
+        {paymentInfo && (
+          <View style={styles.dataContainer}>
+            <View style={styles.dataContainerHeader}>
+              <Text style={styles.title}>Payment</Text>
+              <Link
+                href={'/checkout/payment'}
+                style={{ color: '#005055', fontWeight: '600' }}
+              >
+                Edit
+              </Link>
+            </View>
+            {Object.entries(paymentInfo).map(([key, value]) => (
+              <Text key={key}>
+                {key}: {value?.toString()}
+              </Text>
+            ))}
+          </View>
+        )}
+
+        <CustomButton title="Submit" onPress={onSubmit} />
+      </View>
+    </KeyboardAwareScrollView>
   )
 }
 
-export default ConfirmForm
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 15,
+    paddingBottom: 25,
+    gap: 15,
+  },
+  dataContainer: {
+    borderWidth: 1,
+    borderColor: 'gainsboro',
+    padding: 10,
+    borderRadius: 10,
+    gap: 3,
+  },
+  dataContainerHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 10,
+  },
+})

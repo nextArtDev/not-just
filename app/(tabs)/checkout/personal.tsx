@@ -30,8 +30,9 @@ function PersonalDetails({}: Props) {
   })
   // const form = useForm()
 
-  const onNext = (data) => {
-    console.log({ data })
+  const onNext = (data: unknown) => {
+    // console.log({ data })
+    setPersonalInfo(data)
     //validate
 
     //router next

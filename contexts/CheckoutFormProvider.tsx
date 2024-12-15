@@ -20,6 +20,7 @@ export const PaymentInfoSchema = z.object({
   expireDate: z
     .string()
     .regex(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/, 'Please use the MM/YY format'),
+  // to initial input as a number
   cvv: z.coerce.number().min(100).max(999),
   saveCard: z.boolean().optional(),
   switchValue: z.boolean().optional(),
@@ -53,6 +54,7 @@ export default function CheckoutFormProvider({ children }: PropsWithChildren) {
     }
     // send it to the server
 
+    console.log('Congrats! The form is Complete')
     setPersonalInfo(undefined)
     setPaymentInfo(undefined)
 
