@@ -12,6 +12,8 @@ import {
 import KeyboardAwareScrollView from '@/components/KeyboardAwareScrollView'
 import CustomTextInput from '@/components/CustomTextInput'
 import CustomButton from '@/components/CustomButton'
+import CustomCheckbox from '@/components/CustomCheckbox'
+import CustomSwitch from '@/components/CustomSwitch'
 // import CustomCheckbox from '../../components/CustomCheckbox'
 // import CustomSwitch from '../../components/CustomSwitch'
 
@@ -57,8 +59,8 @@ export default function PaymentDetailsForm() {
           />
         </View>
 
-        {/* <CustomCheckbox name="saveCard" label="Save credit card" />
-        <CustomSwitch name="switchValue" label="On or off?" /> */}
+        <CustomCheckbox name="saveCard" label="Save credit card" />
+        <CustomSwitch name="switchValue" label="On or off?" />
 
         <CustomButton
           title="Next"
@@ -77,6 +79,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   button: {
-    // marginTop: 'auto',
+    marginTop: 'auto',
   },
 })
