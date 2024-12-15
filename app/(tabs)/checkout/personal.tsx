@@ -21,6 +21,7 @@ import {
 } from '@/contexts/CheckoutFormProvider'
 import CustomPicker from '@/components/CustomPicker'
 import countries from '@/constants/countries.json'
+import CustomDateTimePicker from '@/components/CustomDateTimePicker'
 type Props = {}
 
 function PersonalDetails({}: Props) {
@@ -74,7 +75,7 @@ function PersonalDetails({}: Props) {
           label="Phone Number"
           placeholder=""
         />
-        {/* <CustomTextInput name="birthdate" placeholder="birthdate" /> */}
+        <CustomDateTimePicker name="birthdate" />
 
         <CustomButton
           onPress={form.handleSubmit(onNext)}

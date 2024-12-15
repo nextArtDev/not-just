@@ -12,7 +12,7 @@ export const PersonalInfoSchema = z.object({
   // because the code of country is 2 letters long
   country: z.string().length(2),
   phone: z.string().min(1, { message: 'Phone is required!' }),
-  // birthdate: z.date(),
+  birthdate: z.date(),
 })
 export type PersonalInfo = z.infer<typeof PersonalInfoSchema>
 
