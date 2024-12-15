@@ -13,20 +13,25 @@ import {
   View,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
+import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  PersonalInfo,
+  PersonalInfoSchema,
+  useCheckoutForm,
+} from '@/contexts/CheckoutFormProvider'
 type Props = {}
 
 function PersonalDetails({}: Props) {
-  // const { setPersonalInfo, personalInfo } = useCheckoutForm()
+  const { setPersonalInfo, personalInfo } = useCheckoutForm()
 
-  // const form = useForm<PersonalInfo>({
-  //   resolver: zodResolver(PersonalInfoSchema),
-  //   defaultValues: personalInfo,
-  // })
-  const form = useForm()
+  const form = useForm<PersonalInfo>({
+    resolver: zodResolver(PersonalInfoSchema),
+    defaultValues: personalInfo,
+  })
+  // const form = useForm()
 
   const onNext = (data) => {
-    console.log({data})
+    console.log({ data })
     //validate
 
     //router next
