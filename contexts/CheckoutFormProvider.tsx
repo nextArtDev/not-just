@@ -9,7 +9,8 @@ export const PersonalInfoSchema = z.object({
   address: z.string().min(1, { message: 'Please provide your address!' }),
   city: z.string().min(1, { message: 'City is required!' }),
   postcode: z.string().min(1, { message: 'Postal code is required!' }),
-  // country: z.string().length(2),
+  // because the code of country is 2 letters long
+  country: z.string().length(2),
   phone: z.string().min(1, { message: 'Phone is required!' }),
   // birthdate: z.date(),
 })

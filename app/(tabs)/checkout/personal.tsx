@@ -19,6 +19,8 @@ import {
   PersonalInfoSchema,
   useCheckoutForm,
 } from '@/contexts/CheckoutFormProvider'
+import CustomPicker from '@/components/CustomPicker'
+import countries from '@/constants/countries.json'
 type Props = {}
 
 function PersonalDetails({}: Props) {
@@ -57,12 +59,15 @@ function PersonalDetails({}: Props) {
             placeholder="Post Code"
           />
         </View>
-        {/* <CustomTextInput
-        name="country"
-        inputMode="tel"
-        label="Phone Number"
-        placeholder=""
-      /> */}
+        <CustomPicker
+          name="country"
+          placeholder={{ label: 'Select country' }}
+          items={countries.map((country) => ({
+            label: country.name,
+            value: country.code,
+          }))}
+        />
+
         <CustomTextInput
           name="phone"
           inputMode="tel"
