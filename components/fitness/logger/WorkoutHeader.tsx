@@ -1,27 +1,28 @@
-import { View, Text } from '@/components/general/Themed';
-import { useEffect, useState } from 'react';
-import { calculateDurationHourMinutes } from '@/utils/time';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { useWorkouts } from '@/store';
+import { View, Text } from '@/components/fitness/general/Themed'
+import { useEffect, useState } from 'react'
+
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
+import { useWorkouts } from '@/store'
+import { calculateDurationHourMinutes } from '@/utils/time'
 
 export default function WorkoutHeader() {
-  const [timer, setTimer] = useState('0:00');
+  const [timer, setTimer] = useState('0:00')
 
-  const workout = useWorkouts((state) => state.currentWorkout);
+  const workout = useWorkouts((state) => state.currentWorkout)
 
   useEffect(() => {
     const interval = setInterval(() => {
       const duration = calculateDurationHourMinutes(
         new Date(workout?.createdAt || ''),
         new Date()
-      );
-      setTimer(duration);
-    }, 1000);
+      )
+      setTimer(duration)
+    }, 1000)
 
     return () => {
-      clearInterval(interval);
-    };
-  }, [workout]);
+      clearInterval(interval)
+    }
+  }, [workout])
 
   return (
     <View style={{ gap: 10, backgroundColor: 'transparent', marginBottom: 20 }}>
@@ -30,5 +31,5 @@ export default function WorkoutHeader() {
         <FontAwesome5 name="clock" size={18} color="gray" /> {timer}
       </Text>
     </View>
-  );
+  )
 }

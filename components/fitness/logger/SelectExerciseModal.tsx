@@ -1,24 +1,24 @@
-import CustomButton from '@/components/general/CustomButton';
-import { FlatList, Modal, Pressable, StyleSheet } from 'react-native';
-import { View, Text, TextInput } from '@/components/general/Themed';
-import Card from '@/components/general/Card';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import { useState } from 'react';
-import exercises from '@/data/exercises';
+import CustomButton from '@/components/fitness/general/CustomButton'
+import { FlatList, Modal, Pressable, StyleSheet } from 'react-native'
+import { View, Text, TextInput } from '@/components/fitness/general/Themed'
+import Card from '@/components/fitness/general/Card'
+import AntDesign from '@expo/vector-icons/AntDesign'
+import { useState } from 'react'
+import exercises from '@/data/exercises'
 
 type SelectExerciseModal = {
-  onSelectExercise: (name: string) => void;
-};
+  onSelectExercise: (name: string) => void
+}
 
 export default function SelectExerciseModal({
   onSelectExercise,
 }: SelectExerciseModal) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [search, setSearch] = useState('');
+  const [isOpen, setIsOpen] = useState(false)
+  const [search, setSearch] = useState('')
 
   const filteredExercises = exercises.filter((exercise) =>
     exercise.name.toLowerCase().includes(search.toLowerCase())
-  );
+  )
 
   return (
     <>
@@ -57,8 +57,8 @@ export default function SelectExerciseModal({
               renderItem={({ item }) => (
                 <Pressable
                   onPress={() => {
-                    onSelectExercise(item.name);
-                    setIsOpen(false);
+                    onSelectExercise(item.name)
+                    setIsOpen(false)
                   }}
                   style={{ gap: 3 }}
                 >
@@ -71,7 +71,7 @@ export default function SelectExerciseModal({
         </View>
       </Modal>
     </>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 10,
   },
-});
+})

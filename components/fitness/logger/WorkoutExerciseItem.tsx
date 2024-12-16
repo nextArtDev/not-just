@@ -1,17 +1,17 @@
-import Card from '@/components/general/Card';
-import { View, Text } from '@/components/general/Themed';
-import { StyleSheet } from 'react-native';
-import SetItem from './SetItem';
-import { ExerciseSet, ExerciseWithSets } from '@/types/models';
-import CustomButton from '../general/CustomButton';
-import { useWorkouts } from '@/store';
+import Card from '@/components/fitness/general/Card'
+import { View, Text } from '@/components/fitness/general/Themed'
+import { StyleSheet } from 'react-native'
+import SetItem from './SetItem'
+import { ExerciseSet, ExerciseWithSets } from '@/types/models'
+import CustomButton from '../general/CustomButton'
+import { useWorkouts } from '@/store'
 
 type WorkoutExerciseItem = {
-  exercise: ExerciseWithSets;
-};
+  exercise: ExerciseWithSets
+}
 
 export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItem) {
-  const addSet = useWorkouts((state) => state.addSet);
+  const addSet = useWorkouts((state) => state.addSet)
 
   return (
     <Card title={exercise.name}>
@@ -32,7 +32,7 @@ export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItem) {
         style={{ padding: 10, marginTop: 10 }}
       />
     </Card>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
   },
-});
+})

@@ -5,6 +5,7 @@ import WorkoutListItem from '@/components/fitness/workouts/WorkoutListItem'
 import { FlatList } from 'react-native'
 import { useWorkouts } from '@/store'
 import dummyWorkouts from '@/data/dummyWorkouts'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function HomeScreen() {
   // const currentWorkout = useWorkouts((state) => state.currentWorkout)
@@ -17,7 +18,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         gap: 10,
@@ -40,6 +41,6 @@ export default function HomeScreen() {
         renderItem={({ item }) => <WorkoutListItem workout={item} />}
         showsVerticalScrollIndicator={false}
       />
-    </View>
+    </SafeAreaView>
   )
 }

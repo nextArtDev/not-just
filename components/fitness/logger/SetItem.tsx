@@ -1,32 +1,32 @@
-import { View, Text, TextInput } from '@/components/general/Themed';
-import { ExerciseSet } from '@/types/models';
-import { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { View, Text, TextInput } from '@/components/fitness/general/Themed'
+import { ExerciseSet } from '@/types/models'
+import { useState } from 'react'
+import { StyleSheet } from 'react-native'
 // TODO: In newer version of GH, import the Reanimated version
 // import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import CustomButton from '../general/CustomButton';
-import { useWorkouts } from '@/store';
+import Swipeable from 'react-native-gesture-handler/Swipeable'
+import CustomButton from '../general/CustomButton'
+import { useWorkouts } from '@/store'
 
 type SetItem = {
-  index: number;
-  set: ExerciseSet;
-};
+  index: number
+  set: ExerciseSet
+}
 
 export default function SetItem({ index, set }: SetItem) {
-  const [weight, setWeight] = useState(set.weight?.toString() || '');
-  const [reps, setReps] = useState(set.reps?.toString() || '');
+  const [weight, setWeight] = useState(set.weight?.toString() || '')
+  const [reps, setReps] = useState(set.reps?.toString() || '')
 
-  const updateSet = useWorkouts((state) => state.updateSet);
-  const deleteSet = useWorkouts((state) => state.deleteSet);
+  const updateSet = useWorkouts((state) => state.updateSet)
+  const deleteSet = useWorkouts((state) => state.deleteSet)
 
   const handleWeightChange = () => {
-    updateSet(set.id, { weight: parseFloat(weight) });
-  };
+    updateSet(set.id, { weight: parseFloat(weight) })
+  }
 
   const handleRepsChange = () => {
-    updateSet(set.id, { reps: parseInt(reps) });
-  };
+    updateSet(set.id, { reps: parseInt(reps) })
+  }
 
   const renderRightActions = () => (
     <CustomButton
@@ -36,7 +36,7 @@ export default function SetItem({ index, set }: SetItem) {
       style={{ width: 'auto', padding: 5 }}
       color="crimson"
     />
-  );
+  )
 
   return (
     <Swipeable renderRightActions={renderRightActions}>
@@ -61,7 +61,7 @@ export default function SetItem({ index, set }: SetItem) {
         />
       </View>
     </Swipeable>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-});
+})

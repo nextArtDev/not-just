@@ -1,16 +1,16 @@
-import { ExerciseWithSets } from '@/types/models';
-import Card from '@/components/general/Card';
-import { View, Text } from '@/components/general/Themed';
-import { StyleSheet } from 'react-native';
-import { getBestSet } from '@/services/setService';
-import Colors from '@/constants/Colors';
+import { ExerciseWithSets } from '@/types/models'
+import Card from '@/components/fitness/general/Card'
+import { View, Text } from '@/components/fitness/general/Themed'
+import { StyleSheet } from 'react-native'
+// import { getBestSet } from '@/services/setService'
+import Colors from '@/constants/Colors'
 
 type WorkoutExerciseItem = {
-  exercise: ExerciseWithSets;
-};
+  exercise: ExerciseWithSets
+}
 
 export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItem) {
-  const bestSet = getBestSet(exercise.sets);
+  // const bestSet = getBestSet(exercise.sets)
 
   return (
     <Card title={exercise.name}>
@@ -20,10 +20,11 @@ export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItem) {
           style={[
             styles.setRow,
             {
-              backgroundColor:
-                exerciseSet.id === bestSet?.id
-                  ? Colors.dark.tint + '50'
-                  : 'transparent',
+              // backgroundColor:
+              //   exerciseSet.id === bestSet?.id
+              //     ? Colors.dark.tint + '50'
+              //     : 'transparent',
+              backgroundColor: 'transparent',
             },
           ]}
         >
@@ -40,7 +41,7 @@ export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItem) {
         </View>
       ))}
     </Card>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -61,4 +62,4 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     fontWeight: 'bold',
   },
-});
+})
