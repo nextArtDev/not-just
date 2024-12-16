@@ -36,10 +36,7 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="checkout" />
-        {/* <Stack.Screen
-          name="(tabs)"
-          options={{ title: 'Camera', headerShown: false }}
-        /> */}
+        <Stack.Screen name="workout" />
 
         <Stack.Screen name="+not-found" />
       </Stack>
