@@ -9,10 +9,10 @@ import { useWorkouts } from '@/store'
 export default function WorkoutScreen() {
   const { id } = useLocalSearchParams()
 
-  // const workout = useWorkouts((state) =>
-  //   state.workouts.find((workout) => workout.id === id)
-  // )
-  const workout = dummyWorkouts.find((workout) => workout.id === id)
+  const workout = useWorkouts((state) =>
+    state.workouts.find((workout) => workout.id === id)
+  )
+  // const workout = dummyWorkouts.find((workout) => workout.id === id)
 
   if (!workout) {
     return <Text>Workout not found</Text>

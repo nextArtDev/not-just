@@ -8,12 +8,13 @@ import dummyWorkouts from '@/data/dummyWorkouts'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function HomeScreen() {
-  // const currentWorkout = useWorkouts((state) => state.currentWorkout)
-  // const startWorkout = useWorkouts((state) => state.startWorkout)
-  // const workouts = useWorkouts((state) => state.workouts)
+  const currentWorkout = useWorkouts((state) => state.currentWorkout)
+  const startWorkout = useWorkouts((state) => state.startWorkout)
+  const workouts = useWorkouts((state) => state.workouts)
 
   const onStartWorkout = () => {
-    // startWorkout()
+    startWorkout()
+    console.log(currentWorkout)
     router.push('/workout/current')
   }
 
@@ -26,13 +27,13 @@ export default function HomeScreen() {
         backgroundColor: 'transparent',
       }}
     >
-      {/* {currentWorkout ? (   */}
-      <Link href="/workout/current" asChild>
-        <CustomButton title="Resume workout" />
-      </Link>
-      {/* ) : ( */}
-      <CustomButton title="Start new workout" onPress={onStartWorkout} />
-      {/* )}   */}
+      {currentWorkout ? (
+        <Link href="/workout/current" asChild>
+          <CustomButton title="Resume workout" />
+        </Link>
+      ) : (
+        <CustomButton title="Start new workout" onPress={onStartWorkout} />
+      )}
 
       <FlatList
         // data={workouts}

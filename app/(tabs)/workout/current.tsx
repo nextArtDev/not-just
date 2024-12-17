@@ -10,15 +10,15 @@ import SelectExerciseModal from '@/components/fitness/logger/SelectExerciseModal
 import { useWorkouts } from '@/store'
 
 export default function CurrentWorkoutScreen() {
-  // const currentWorkout = useWorkouts((state) => state.currentWorkout)
-  // const finishWorkout = useWorkouts((state) => state.finishWorkout)
-  // const addExercise = useWorkouts((state) => state.addExercise)
+  const currentWorkout = useWorkouts((state) => state.currentWorkout)
+  const finishWorkout = useWorkouts((state) => state.finishWorkout)
+  const addExercise = useWorkouts((state) => state.addExercise)
 
   const headerHeight = useHeaderHeight()
 
-  // if (!currentWorkout) {
-  //   return <Redirect href={'/'} />
-  // }
+  if (!currentWorkout) {
+    return <Redirect href={'/'} />
+  }
 
   return (
     <>
@@ -26,8 +26,8 @@ export default function CurrentWorkoutScreen() {
         options={{
           headerRight: () => (
             <CustomButton
-              // onPress={() => finishWorkout()}
-              onPress={() => console.log('OK')}
+              onPress={() => finishWorkout()}
+              // onPress={() => console.log('OK')}
               title="Finish"
               style={{ padding: 7, paddingHorizontal: 15, width: 'auto' }}
             />
@@ -39,7 +39,7 @@ export default function CurrentWorkoutScreen() {
         style={{ flex: 1 }}
         keyboardVerticalOffset={headerHeight}
       >
-        {/* <FlatList
+        <FlatList
           data={currentWorkout.exercises}
           contentContainerStyle={{ gap: 10, padding: 10 }}
           renderItem={({ item }) => <WorkoutExerciseItem exercise={item} />}
@@ -49,7 +49,7 @@ export default function CurrentWorkoutScreen() {
               onSelectExercise={(name) => addExercise(name)}
             />
           }
-        /> */}
+        />
       </KeyboardAvoidingView>
     </>
   )

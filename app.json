@@ -24,15 +24,17 @@
     },
     "plugins": [
       "expo-router",
-     [ "expo-splash-screen",
-      {
-        "image": "./assets/images/splash-icon.png",
-        "imageWidth": 200,
-        "resizeMode": "contain",
-        "backgroundColor": "#ffffff"
-      }],
       [
-         "expo-camera",
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-camera",
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
@@ -41,12 +43,14 @@
       ],
       "expo-video",
       [
-"expo-media-library", {
+        "expo-media-library",
+        {
           "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
           "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
           "isAccessMediaLocationEnabled": true
         }
-      ]
+      ],
+      "expo-sqlite"
     ],
     "experiments": {
       "typedRoutes": true
