@@ -2,7 +2,7 @@ import { ExerciseWithSets } from '@/types/models'
 import Card from '@/components/fitness/general/Card'
 import { View, Text } from '@/components/fitness/general/Themed'
 import { StyleSheet } from 'react-native'
-// import { getBestSet } from '@/services/setService'
+import { getBestSet } from '@/services/setService'
 import Colors from '@/constants/Colors'
 
 type WorkoutExerciseItem = {
@@ -10,7 +10,7 @@ type WorkoutExerciseItem = {
 }
 
 export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItem) {
-  // const bestSet = getBestSet(exercise.sets)
+  const bestSet = getBestSet(exercise.sets)
 
   return (
     <Card title={exercise.name}>
@@ -20,11 +20,10 @@ export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItem) {
           style={[
             styles.setRow,
             {
-              // backgroundColor:
-              //   exerciseSet.id === bestSet?.id
-              //     ? Colors.dark.tint + '50'
-              //     : 'transparent',
-              backgroundColor: 'transparent',
+              backgroundColor:
+                exerciseSet.id === bestSet?.id
+                  ? Colors.dark.tint + '50'
+                  : 'transparent',
             },
           ]}
         >

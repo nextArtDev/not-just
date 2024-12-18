@@ -5,8 +5,8 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import { WorkoutWithExercises } from '@/types/models'
 import dayjs from 'dayjs'
 
-// import { getBestSet } from '@/services/setService'
-// import { getWorkoutTotalWeight } from '@/services/workoutService'
+import { getBestSet } from '@/services/setService'
+import { getWorkoutTotalWeight } from '@/services/workoutService'
 import { calculateDuration } from '@/utils/time'
 
 type WorkoutListItem = {
@@ -26,18 +26,18 @@ export default function WorkoutListItem({ workout }: WorkoutListItem) {
       </View>
 
       {workout.exercises.map((exercise) => {
-        // const bestSet = getBestSet(exercise.sets)
+        const bestSet = getBestSet(exercise.sets)
         return (
           <View key={exercise.id} style={styles.row}>
             <Text style={{ color: 'gray' }}>
               {exercise.sets.length} x {exercise.name}
             </Text>
-            {/* {bestSet && (
+            {bestSet && (
               <Text style={{ color: 'gray' }}>
                 {bestSet.reps}{' '}
                 {bestSet.weight ? `x ${bestSet.weight} kg` : 'reps'}
               </Text>
-            )} */}
+            )}
           </View>
         )
       })}
@@ -50,7 +50,7 @@ export default function WorkoutListItem({ workout }: WorkoutListItem) {
         </Text>
         <Text>
           <FontAwesome5 name="weight-hanging" size={16} color="gray" />{' '}
-          {/* {getWorkoutTotalWeight(workout)} kg */}
+          {getWorkoutTotalWeight(workout)} kg
         </Text>
       </View>
     </Card>
