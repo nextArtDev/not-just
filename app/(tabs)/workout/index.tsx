@@ -36,8 +36,8 @@ export default function HomeScreen() {
       )}
 
       <FlatList
-        // data={workouts}
-        data={dummyWorkouts}
+        data={workouts}
+        // data={dummyWorkouts}
         contentContainerStyle={{ gap: 8 }}
         renderItem={({ item }) => <WorkoutListItem workout={item} />}
         showsVerticalScrollIndicator={false}
