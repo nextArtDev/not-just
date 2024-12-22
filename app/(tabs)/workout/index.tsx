@@ -14,7 +14,7 @@ export default function HomeScreen() {
 
   const onStartWorkout = () => {
     startWorkout()
-    console.log(currentWorkout)
+    // console.log(currentWorkout)
     router.push('/workout/current')
   }
 
@@ -37,7 +37,6 @@ export default function HomeScreen() {
 
       <FlatList
         data={workouts}
-        // data={dummyWorkouts}
         contentContainerStyle={{ gap: 8 }}
         renderItem={({ item }) => <WorkoutListItem workout={item} />}
         showsVerticalScrollIndicator={false}

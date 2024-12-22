@@ -8,6 +8,7 @@ import CustomButton from '@/components/fitness/general/CustomButton'
 import WorkoutHeader from '@/components/fitness/logger/WorkoutHeader'
 import SelectExerciseModal from '@/components/fitness/logger/SelectExerciseModal'
 import { useWorkouts } from '@/store'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function CurrentWorkoutScreen() {
   const currentWorkout = useWorkouts((state) => state.currentWorkout)
@@ -21,15 +22,21 @@ export default function CurrentWorkoutScreen() {
   }
 
   return (
-    <>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        gap: 10,
+        padding: 10,
+        backgroundColor: 'transparent',
+      }}
+    >
       <Stack.Screen
         options={{
           headerRight: () => (
             <CustomButton
               onPress={() => finishWorkout()}
-              // onPress={() => console.log('OK')}
               title="Finish"
-              style={{ padding: 7, paddingHorizontal: 15, width: 'auto' }}
+              // style={{ padding: 7, paddingHorizontal: 15, width: 'auto' }}
             />
           ),
         }}
@@ -39,6 +46,16 @@ export default function CurrentWorkoutScreen() {
         style={{ flex: 1 }}
         keyboardVerticalOffset={headerHeight}
       >
+        <CustomButton
+          onPress={() => finishWorkout()}
+          title="Finish"
+          style={{
+            marginTop: 10,
+            padding: 7,
+            paddingHorizontal: 15,
+            width: 'auto',
+          }}
+        />
         <FlatList
           data={currentWorkout.exercises}
           contentContainerStyle={{ gap: 10, padding: 10 }}
@@ -51,6 +68,6 @@ export default function CurrentWorkoutScreen() {
           }
         />
       </KeyboardAvoidingView>
-    </>
+    </SafeAreaView>
   )
 }
