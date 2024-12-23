@@ -25,7 +25,7 @@ export default function FitnessLayout() {
 
   return (
     <>
-      <Stack screenOptions={{ headerShown: false }}>
+      <Stack>
         <Stack.Screen name="index" />
         <Stack.Screen name="workout/current" options={{ title: 'Workout' }} />
         <Stack.Screen name="workout/[id]" options={{ title: 'Workout' }} />

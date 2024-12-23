@@ -36,7 +36,7 @@ export default function CurrentWorkoutScreen() {
             <CustomButton
               onPress={() => finishWorkout()}
               title="Finish"
-              // style={{ padding: 7, paddingHorizontal: 15, width: 'auto' }}
+              style={{ padding: 7, paddingHorizontal: 15, width: 'auto' }}
             />
           ),
         }}
@@ -46,7 +46,7 @@ export default function CurrentWorkoutScreen() {
         style={{ flex: 1 }}
         keyboardVerticalOffset={headerHeight}
       >
-        <CustomButton
+        {/* <CustomButton
           onPress={() => finishWorkout()}
           title="Finish"
           style={{
@@ -55,7 +55,7 @@ export default function CurrentWorkoutScreen() {
             paddingHorizontal: 15,
             width: 'auto',
           }}
-        />
+        /> */}
         <FlatList
           data={currentWorkout.exercises}
           contentContainerStyle={{ gap: 10, padding: 10 }}
