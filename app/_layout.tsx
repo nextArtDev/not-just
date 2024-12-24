@@ -36,7 +36,8 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="checkout" />
-        <Stack.Screen name="workout" />
+        {/* <Stack.Screen name="workout" /> */}
+        <Stack.Screen name="game" />
 
         <Stack.Screen name="+not-found" />
       </Stack>
